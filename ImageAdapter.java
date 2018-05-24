@@ -6,8 +6,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.concurrent.Semaphore;
+
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private Semaphore semaphore = new Semaphore(1);
 
     public ImageAdapter(Context c) {
         mContext = c;
@@ -80,4 +83,8 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     public Integer[] mThumbIds = createGO(20);
+
+    public Semaphore getSemaphore() {
+        return semaphore;
+    }
 }

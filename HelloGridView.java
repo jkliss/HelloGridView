@@ -3,12 +3,11 @@ package com.example.julius.hellogridview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
+
+import java.util.concurrent.Semaphore;
 
 public class HelloGridView extends AppCompatActivity {
 
@@ -23,7 +22,8 @@ public class HelloGridView extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                ImageAdapter imageAdapter = (ImageAdapter) parent.getAdapter();
+                final ImageAdapter imageAdapter = (ImageAdapter) parent.getAdapter();
+                //final Semaphore semaphore = imageAdapter.getSemaphore();
                 imageAdapter.changeColor(position, current_color[0]);
                 imageAdapter.notifyDataSetChanged();
             }
@@ -32,7 +32,6 @@ public class HelloGridView extends AppCompatActivity {
         imageButton1[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("test1");
                 current_color[0] = 1;
             }
         });
@@ -40,7 +39,6 @@ public class HelloGridView extends AppCompatActivity {
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("test2");
                 current_color[0] = 2;
             }
         });
@@ -48,7 +46,6 @@ public class HelloGridView extends AppCompatActivity {
         imageButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("test3");
                 current_color[0] = 0;
             }
         });
