@@ -7,17 +7,15 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
-import java.util.concurrent.Semaphore;
-
 public class HelloGridView extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+        final GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
+        final HelloGridView hgv = this;
         final int[] current_color = {0};
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
@@ -47,6 +45,13 @@ public class HelloGridView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 current_color[0] = 0;
+            }
+        });
+        ImageButton resetbutton = (ImageButton) findViewById(R.id.resetbutton);
+        resetbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gridview.setAdapter(new ImageAdapter(hgv));
             }
         });
     }
